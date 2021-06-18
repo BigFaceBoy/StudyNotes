@@ -1,0 +1,1 @@
+if(fast>=numsSize) break;
