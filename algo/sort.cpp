@@ -107,8 +107,83 @@ static void heapSprt(){}
 
 
 /**
- * 快速排序： 
+ * 快速排序优化方案：
+ * 1、优化 pivot 的选取策略
+ * 2、优化不必要的交换
+ * 3、优化小数组时的排序方案:当数组长度小于某个值时，使用插入排序
+ * 4、优化递归操作
 */
+
+// pivot 选取策略：三数曲中
+static doPartition1(int* array, int begin , int end){
+    //三数取中
+    int mid = begin + (end - begin)/2;
+    if(array[begin] > array[end])
+        swap(array,begin , end);
+    if(array[mid] > array[end])
+        swap(array,mid , end);
+    if(array[mid] >array[begin])
+        swap(array, begin, mid);
+    int pivot = array[begin];
+
+    while (begin < end)
+    {
+        while (begin < end && array[end] >= pivot)
+        {
+            end--;
+        }
+        swap(array, begin, end);
+        while (begin < end && array[begin] <= pivot)
+        {
+            begin++;
+        }
+        swap(array,begin, end);
+    }
+    return begin; 
+}
+
+//优化交换
+static doPartition2(int* array, int begin , int end){
+    //三数取中
+    int mid = begin + (end - begin)/2;
+    if(array[begin] > array[end])
+        swap(array,begin , end);
+    if(array[mid] > array[end])
+        swap(array,mid , end);
+    if(array[mid] >array[begin])
+        swap(array, begin, mid);
+    int pivot = array[begin];
+
+
+    while (begin < end)
+    {
+        while (begin < end && array[end] >= pivot)
+        {
+            end--;
+        }
+        array[begin] = array[end];
+        while (begin < end && array[begin] <= pivot)
+        {
+            begin++;
+        }
+        array[end] = array[begin];
+    }
+    array[begin] = pivot;
+    return begin; 
+}
+
+//优化递归:尾递归
+static void doQuick1(int *array, int begin, int end){
+    while(begin < end){
+        int index = doPartition2(array, begin, end);
+        doQuick(array, begin, index-1);
+        begin = index + 1;
+    }
+}
+
+
+
+
 static doPartition(int* array, int begin , int end){
     int pivot = array[begin];
     while (begin < end)
@@ -130,11 +205,13 @@ static doPartition(int* array, int begin , int end){
 
 static void doQuick(int *array, int begin, int end){
     if(begin < end){
-        int index = doPartition(array, begin, end);
+        int index = doPartition2(array, begin, end);
         doQuick(array, begin, index-1);
         doQuick(array, index+1, end);
     }
 }
+
+
 
 static void quickSort(int *array, int len){
     doQuick(array,0, len-1);
