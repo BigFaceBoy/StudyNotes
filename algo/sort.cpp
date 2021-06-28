@@ -115,7 +115,7 @@ static void heapSprt(){}
 */
 
 // pivot 选取策略：三数曲中
-static doPartition1(int* array, int begin , int end){
+static int doPartition1(int* array, int begin , int end){
     //三数取中
     int mid = begin + (end - begin)/2;
     if(array[begin] > array[end])
@@ -143,7 +143,7 @@ static doPartition1(int* array, int begin , int end){
 }
 
 //优化交换
-static doPartition2(int* array, int begin , int end){
+static int doPartition2(int* array, int begin , int end){
     //三数取中
     int mid = begin + (end - begin)/2;
     if(array[begin] > array[end])
@@ -184,7 +184,7 @@ static void doQuick1(int *array, int begin, int end){
 
 
 
-static doPartition(int* array, int begin , int end){
+static int doPartition(int* array, int begin , int end){
     int pivot = array[begin];
     while (begin < end)
     {

@@ -273,8 +273,6 @@ new[]和delete[]一定要配对使用吗？
     而调用free(q)的时候，该函数把p减去sizeof(control_block)，然后就可以根据((control_blcok*)q)->size得到要释放的内存区域的大小。
     这也就是为什么free只能用来释放malloc分配的内存，如果用于释放其他的内存，会发生未知的错误。
 
-realloc?
-
 
 17、了解auto和decltype吗？
     
@@ -286,64 +284,84 @@ realloc?
 
 19、了解列表初始化吗？
 
-平时会用到function、bind、lambda吗，都什么场景下会用到？
+20、平时会用到function、bind、lambda吗，都什么场景下会用到？
 
-对C++11的mutex和RAII lock有过了解吗？
+21、对C++11的mutex和RAII lock有过了解吗？
 
-对C++11的智能指针了解多少，可以自己实现一个智能指针吗？
+22、对C++11的智能指针了解多少，可以自己实现一个智能指针吗？
 
-enum 和 enum class有什么区别？
+23、enum 和 enum class有什么区别？
 
-一般什么情况下会出现内存泄漏？
+24、一般什么情况下会出现内存泄漏？
 
-怎么用C++在编码层面尽量避免内存泄漏。
+25、怎么用C++在编码层面尽量避免内存泄漏。
 
-unique_ptr如何转换所有权？
+26、unique_ptr如何转换所有权？
+    使用 swap，如下：
+    #include <iostream>
+    #include <memory>
 
-谈一谈你对面向对象的理解什么场景下使用继承方式，什么场景下使用组合？
+    int main () {
+        std::unique_ptr<int> foo (new int(10));
+        std::unique_ptr<int> bar (new int(20));
 
-STL系列C++直接使用数组好还是使用std::array好？std::array是怎么实现的？
+        foo.swap(bar);
 
-std::vector最大的特点是什么？它的内部是怎么实现的？resize和reserve的区别是什么？clear是怎么实现的？
+        std::cout << "foo: " << *foo << '\n';
+        std::cout << "bar: " << *bar << '\n';
 
-deque的底层数据结构是什么？它的内部是怎么实现的？
+        return 0;
+    }
 
-map和unordered_map有什么区别？分别在什么场景下使用？
+27、谈一谈你对面向对象的理解什么场景下使用继承方式，什么场景下使用组合？
 
-list的使用场景？std::find可以传入list对应的迭代器吗？
+28、STL系列C++直接使用数组好还是使用std::array好？std::array是怎么实现的？
 
-string的常用函数
+29、std::vector最大的特点是什么？它的内部是怎么实现的？resize和reserve的区别是什么？clear是怎么实现的？
+    可变数组
+    数组
+    resize 改变容器大小以容纳n个元素，n小于当前大小，则容器会保留前n个元素，后续的都会被销毁；n大于当前大小，则会扩容
+    reserve 确保容器大小能够容纳n个元素，n小于当前大小，啥都不做；n大于当前大小，则会扩容
+ 
+30、deque的底层数据结构是什么？它的内部是怎么实现的？
+    双端队列
+
+31、map和unordered_map有什么区别？分别在什么场景下使用？
+
+32、list的使用场景？std::find可以传入list对应的迭代器吗？
+
+33、string的常用函数
 
 
-const的作用有哪些，谈一谈你对const的理解？
+34、const的作用有哪些，谈一谈你对const的理解？
 
 描述char*、const char*、char* const、const char* const的区别？
 
 指针常量和常量指针有什么区别？
 
-static的作用是什么，什么情况下用到static？
+35、static的作用是什么，什么情况下用到static？
 
-全局变量与局部变量的区别？宏定义的作用是什么？
+36、全局变量与局部变量的区别？宏定义的作用是什么？
 
-内存对齐的概念？为什么会有内存对齐？
+37、内存对齐的概念？为什么会有内存对齐？
 
-inline 内联函数的特点有哪些？它的优缺点是什么？
+38、inline 内联函数的特点有哪些？它的优缺点是什么？
 
-如何用C 实现 C++ 的面向对象特性（封装、继承、多态）
+39、如何用C 实现 C++ 的面向对象特性（封装、继承、多态）
 
-memcpy怎么实现让它效率更高？
+40、memcpy怎么实现让它效率更高？
 
-typedef和define有什么区别？
+41、typedef和define有什么区别？
 
-extern有什么作用，extern C有什么作用？
+42、extern有什么作用，extern C有什么作用？
 
-如何避免野指针？
+43、如何避免野指针？
 
-如何计算结构体长度？
+44、如何计算结构体长度？
 
-sizeof和strlen有什么区别？
+45、sizeof和strlen有什么区别？
 
-知道条件变量吗？条件变量为什么要和锁配合使用？
+46、知道条件变量吗？条件变量为什么要和锁配合使用？
 
 
 
